@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+<h:head>
+<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+</h:head>
+
+<h:body>
+	<h:form>
+			<p:panel header="Lista de Clientes" style="margin-bottom:10px; width: 49%">
+			<p:dataTable var="anuncio" value="#{AnuncioBean.listaAnuncio}">
+				<p:column headerText="Cliente">
+					<h:outputText value="#{anuncio.cliente}" />
+				</p:column>
+				<p:column headerText="Cpf">
+					<h:outputText value="#{anuncio.cpf}" />
+				</p:column>
+				<p:column headerText="Editar" width="15%">
+					<p:commandButton icon="pi pi-pencil" action="#{AnuncioBean.editar}"> 
+						<f:setPropertyActionListener
+							target="#{AnuncioBean.cpfSelecionado}"
+							value="#{anuncio.cpf}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Remover" width="15%">
+					<p:commandButton icon="pi pi-times" updta="@form" action="#{AnuncioBean.remover}">
+					<f:setPropertyActionListener 
+							target="#{AnuncioBean.cpfSelecionado}"
+							value="#{anuncio.cpf}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+			<p:panelGrid style="width: 50%">
+			<p:row>
+				<p:column style="width:40px">
+					<h:outputLabel value="Cliente: " />
+				</p:column>
+				<p:column colspan="2" style="width:400px">
+					<p:inputText />
+				</p:column>
+			</p:row>
+				<p:row>
+				<p:column>
+					<p:commandButton value="Pesquisar" update="@form"
+						 actionListener="#{AnuncioBean.pesquisar}"/>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Criar Anuncio" updta="@form" 
+					actionListener="#{AnuncioBean.abrirManterAnuncio}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+	</h:form>
+</h:body>
+</html>
